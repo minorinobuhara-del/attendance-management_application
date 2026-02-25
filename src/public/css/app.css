@@ -1,0 +1,49 @@
+.app-body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: #efefef;
+}
+
+.app-header {
+    background: #000;
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.app-header__inner {
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-logo {
+    height: 28px;
+    display: block;
+}
+
+.app-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.app-nav__link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.app-logout {
+    margin: 0;
+}
+
+.app-logout__btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}

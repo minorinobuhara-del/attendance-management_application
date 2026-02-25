@@ -1,0 +1,46 @@
+.attendance {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.attendance__pill {
+    background: #cfcfcf;
+    color: #555;
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.attendance__date {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.attendance__time {
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.attendance__actions {
+    margin-top: 16px;
+}
+
+.btn {
+    height: 54px;
+    padding: 0 48px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    border: 1px solid transparent;
+}
+
+.btn-black {
+    background: #000;
+    color: #fff;
+}

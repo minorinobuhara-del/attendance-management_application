@@ -18,6 +18,49 @@ Laravel 開発環境構築
 
 ・cp .env.example .env（環境変数を変更）
 
+・composer require laravel/fortify
+
+・php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+
+・php artisan key:generate
+
+・php artisan config:clear
+
+・php artisan cache:clear
+
+・php artisan optimize:clear
+
+・php artisan tinker
+
+・brew install node
+
+・php artisan make:request
+
+・php artisan make:controller
+
+・php artisan make:migration
+
+・php artisan migrate
+
+## 開発環境
+
+・phpMyAdmin:http://localhost:8080/
+
+## メール認証について
+
+本アプリケーションでは、Laravel Fortify のメール認証機能を確認中（動作中）です。
+メール認証が完了していないユーザーはログインできないように確認中です。
+
+## メール送信環境
+
+ローカル開発環境では MailHog を使用しています。
+
+- 172.27.0.4 mailhog
+
+- メール確認URL（実行中）：http://localhost:8025
+
+- メール内容は実送信されています。
+
 ## 使用技術
 
 ・nginx/1.21.1
@@ -27,3 +70,7 @@ Laravel 開発環境構築
 ・Laravel Framework 8.83.8
 
 ・PHP 8.1.34
+
+・Homebrew 4.6.17
+
+・Note v25.6.1
