@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}?v={{ time() }}">
     <!--@vite(['resources/css/app.css', 'resources/js/app.js'])-->
 </head>
 <body class="auth-body">

@@ -87,8 +87,17 @@
     text-decoration: none;
 }
 
-/*ログインエラーメッセージ*/
-
+/*会員登録・ログインエラーメッセージ*/
+.auth-errors {
+    color: #d93025;
+    background-color: #fdecea;
+    border: 1px solid #f5c6cb;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
 .auth-errors ul {
     list-style: none;
     padding: 0;
@@ -98,6 +107,9 @@
 .auth-errors li {
     text-align: center;
     margin: 6px 0;
+}
+.input-error {
+    border: 2px solid #e60000;
 }
 
 /*メール認証*/

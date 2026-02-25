@@ -8,7 +8,7 @@ class ValidateLogin
 {
     public function handle($request, $next)
     {
-        // ここで日本語メッセージのバリデーションを実行
+        // FormRequest を実行（ここで日本語メッセージ）
         app(LoginRequest::class)->validateResolved();
 
         return $next($request);
