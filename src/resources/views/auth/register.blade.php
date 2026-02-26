@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', '会員登録')
+@section('title', '会員登録(一般ユーザー)')
 @section('content')
 <h1 class="auth-title">会員登録</h1>
     @if ($errors->any())

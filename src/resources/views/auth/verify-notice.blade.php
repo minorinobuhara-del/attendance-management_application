@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', 'メール認証')
+@section('title', 'メール認証誘導')
 
 @section('content')
 <p class="auth-note">

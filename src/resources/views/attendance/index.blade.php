@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '出勤登録画面')
+@section('title', '出勤登録画面(一般ユーザー)')
 
 @section('content')
 <div class="attendance-page">

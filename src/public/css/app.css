@@ -136,3 +136,89 @@
     font-size: 20px;
     font-weight: 700;
 }
+
+/* ===== 勤怠一覧 ===== */
+.list-page {
+    min-height: calc(100vh - 64px);
+    background: #efefef;
+    padding: 28px 16px 60px;
+}
+
+.list-card {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.list-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    margin: 10px 0 14px;
+}
+
+.list-title__bar {
+    font-weight: 900;
+}
+
+.list-month {
+    background: #fff;
+    border-radius: 6px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.list-month__btn {
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.list-month__center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.list-table-wrap {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.list-table thead th {
+    background: #f7f7f7;
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: 800;
+}
+
+.list-table tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.list-detail {
+    color: #111;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.list-detail:hover {
+    text-decoration: underline;
+}

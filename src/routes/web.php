@@ -5,6 +5,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 
-    Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clockIn');
-    Route::post('/attendance/break-in', [AttendanceController::class, 'breakIn'])->name('attendance.breakIn');
-    Route::post('/attendance/break-out', [AttendanceController::class, 'breakOut'])->name('attendance.breakOut');
-    Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clockOut');
+    Route::post('/attendance/clock-in', [AttendanceController::class, 'clockIn'])->name('attendance.clockIn');//出勤
+    Route::post('/attendance/break-in', [AttendanceController::class, 'breakIn'])->name('attendance.breakIn');//休憩開始
+    Route::post('/attendance/break-out', [AttendanceController::class, 'breakOut'])->name('attendance.breakOut');//休憩終了
+    Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clockOut');//退勤
+    Route::get('/attendance/list', [AttendanceListController::class, 'index'])->name('attendance.list');//勤怠一覧
+    Route::get('/attendance/{date}', [AttendanceListController::class, 'show'])->name('attendance.show'); // 詳細
 });
 
