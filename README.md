@@ -42,6 +42,8 @@ Laravel 開発環境構築
 
 ・php artisan migrate
 
+・php artisan make:model
+
 ## 開発環境
 
 ・phpMyAdmin:http://localhost:8080/

@@ -13,6 +13,8 @@
 
 .app-header__inner {
     width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 0 24px;
     display: flex;
     align-items: center;
@@ -46,4 +48,91 @@
     border: none;
     padding: 0;
     cursor: pointer;
+}
+
+/* 背景/中央寄せ */
+.attendance-page {
+    min-height: calc(100vh - 64px);
+    background: #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 16px;
+}
+
+.attendance-card {
+    width: 100%;
+    max-width: 980px;
+    text-align: center;
+}
+
+/* ステータスの丸いラベル */
+.attendance-status {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: #cfcfcf;
+    color: #555;
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+/* 日付と時刻 */
+.attendance-date {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.attendance-time {
+    font-size: 88px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+}
+
+/* ボタンエリア */
+.attendance-actions {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+}
+
+/* 共通ボタン */
+.btn {
+    width: 240px;
+    height: 72px;
+    border-radius: 14px;
+    font-size: 26px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* 黒ボタン（出勤/退勤） */
+.btn-black {
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+/* 白ボタン（休憩系） */
+.btn-white {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+/* 退勤後メッセージ */
+.attendance-finished {
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* セッションメッセージ（退勤時） */
+.attendance-message {
+    margin: 10px 0 18px;
+    font-size: 20px;
+    font-weight: 700;
 }

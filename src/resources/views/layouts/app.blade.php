@@ -21,7 +21,7 @@
     <a class="app-nav__link" href="#">勤怠一覧</a>
     <a class="app-nav__link" href="#">申請</a>
 
-    {{-- ✅ Fortifyログアウト（POST） --}}
+    {{-- Fortifyログアウト（POST） --}}
     <form method="POST" action="{{ route('logout') }}" class="app-logout">
         @csrf
         <button type="submit" class="app-nav__link app-logout__btn">ログアウト</button>
