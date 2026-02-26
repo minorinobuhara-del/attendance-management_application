@@ -89,8 +89,7 @@ class AttendanceController extends Controller
 
         $attendance->update(['clock_out' => now()]);
 
-        return redirect()->route('attendance.index')
-            ->with('message', 'お疲れ様でした。');
+        return redirect()->route('attendance.index');
     }
 
     private function todayAttendanceOrFail(Request $request): Attendance
