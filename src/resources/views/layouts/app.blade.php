@@ -19,7 +19,7 @@
     <nav class="app-nav">
     <a class="app-nav__link" href="{{ route('attendance.index') }}">勤怠</a>
     <a class="app-nav__link" href="{{ route('attendance.list') }}">勤怠一覧</a>
-    <a class="app-nav__link" href="#">申請</a>
+    <a class="app-nav__link" href="{{ route('stamp_correction_request.list') }}">申請</a>
 
     {{-- Fortifyログアウト（POST） --}}
     <form method="POST" action="{{ route('logout') }}" class="app-logout">

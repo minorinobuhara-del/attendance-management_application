@@ -72,6 +72,7 @@ class AttendanceListController extends Controller
             }
 
             $rows[] = [
+                'id' => $attendance?->id,
                 'label' => $day->format('m/d') . '(' . ['日','月','火','水','木','金','土'][$day->dayOfWeek] . ')',
                 'date' => $dateKey,
                 'clock_in' => $clockIn,

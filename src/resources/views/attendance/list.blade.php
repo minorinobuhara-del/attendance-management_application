@@ -42,7 +42,7 @@
                             <td>{{ $r['break'] }}</td>
                             <td>{{ $r['total'] }}</td>
                             <td>
-                                <a class="list-detail" href="{{ route('attendance.show', ['date' => $r['date']]) }}">詳細</a>
+                                <a class="detail-link" href="{{ url('/attendance/detail/'.$r['id']) }}">詳細</a>
                             </td>
                         </tr>
                     @endforeach
