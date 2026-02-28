@@ -36,6 +36,10 @@ class AttendanceUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'clock_in.required' => '出勤時間を入力してください',
+            'clock_out.required' => '退勤時間を入力してください',
+            'clock_in.date_format' => '出勤時間は「HH:MM」形式で入力してください',
+            'clock_out.date_format' => '退勤時間は「HH:MM」形式で入力してください',
             'note.required' => '備考を記入してください',
         ];
     }

@@ -46,8 +46,8 @@
     </div>
 
     {{-- 退勤済：メッセージだけ --}}
-    @if ($status === '退勤済')
-    <div class="attendance-finished">お疲れ様でした。</div>
+    @if (session('message') && $status !== '退勤済')
+    <div class="attendance-finished">{{ session('message') }}</div>
     @endif
 
   </div>

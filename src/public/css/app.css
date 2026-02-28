@@ -50,6 +50,10 @@
     cursor: pointer;
 }
 
+.app-main {
+    padding: 40px 0 80px;
+}
+
 /* 背景/中央寄せ */
 .attendance-page {
     min-height: calc(100vh - 64px);
@@ -224,71 +228,125 @@
 }
 
 /* 詳細画面 */
+/* 共通ページ枠 */
+.page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding:0 16px;
+}
+
+.detail-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+/* 見出し（左に縦棒） */
+.page-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 0 18px;
+}
+
+.page-bar {
+    width: 4px;
+    height: 24px;
+    background: #000;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* 詳細カード */
 .detail-card {
     background: #fff;
     border-radius: 6px;
     overflow: hidden;
-    margin-top: 18px;
+    box-shadow: 0 0 0 1px #e6e6e6 inset;
+    width:100%;
+    margin:0;
 }
 
+/* テーブル */
 .detail-table {
     width: 100%;
     border-collapse: collapse;
 }
 
+.detail-table th,
+.detail-table td {
+    border-top: 1px solid #eee;
+    padding: 22px 24px;
+    vertical-align: middle;
+}
+
+.detail-table tr:first-child th,
+.detail-table tr:first-child td {
+    border-top: none;
+}
+
 .detail-table th {
     width: 220px;
+    color: #777;
+    font-weight: 700;
     background: #fff;
-    font-size: 12px;
-    color: #666;
-    padding: 18px 18px;
-    border-bottom: 1px solid #eee;
 }
 
 .detail-table td {
-    padding: 18px 18px;
-    border-bottom: 1px solid #eee;
-    font-weight: 800;
+    text-align: center;
 }
 
+.detail-strong {
+    font-weight: 800;
+    color: #000;
+}
+
+/* 時刻入力 */
 .time-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 16px;
 }
 
 .time-input {
-    width: 90px;
-    height: 26px;
-    border: 1px solid #ddd;
+    width: 88px;
+    height: 28px;
+    border: 1px solid #dcdcdc;
     border-radius: 3px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 700;
+    background: #fff;
 }
 
 .time-tilde {
+    font-weight: 700;
     color: #666;
-    font-weight: 800;
 }
 
+/* 備考 */
 .note-input {
     width: 320px;
-    height: 70px;
-    border: 1px solid #ddd;
+    height: 62px;
+    border: 1px solid #dcdcdc;
     border-radius: 3px;
-    padding: 10px;
-    font-weight: 700;
+    padding: 10px 12px;
+    resize: none;
 }
 
+/* 修正ボタン（右下） */
 .detail-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 16px;
+    margin-top: 22px;
 }
 
 .black-mini {
     width: 120px;
-    height: 40px;
+    height: 44px;
     background: #000;
     color: #fff;
     border: none;
@@ -297,20 +355,19 @@
     cursor: pointer;
 }
 
+/* 承認待ち注意 */
 .warn-text {
-    color: #e60000;
-    font-weight: 800;
+    margin-top: 18px;
     text-align: right;
-    margin-top: 12px;
+    color: #e35656;
+    font-weight: 700;
 }
 
+/* エラー */
 .error-box {
-    margin-top: 14px;
+    margin-top: 18px;
     color: #d93025;
-    background: #fdecea;
-    border: 1px solid #f5c6cb;
-    padding: 12px 14px;
-    border-radius: 6px;
+    font-weight: 700;
 }
 
 .error-box ul {
@@ -336,4 +393,79 @@
 
 .tab.is-active {
     border-bottom: 3px solid #000;
+}
+
+/* 申請一覧ページ全体（余白と中央寄せ） */
+.request-page {
+    padding: 28px 16px 60px;
+}
+
+/* 申請一覧の中央カード枠（見本の“枠内”） */
+.request-card {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+/* タブ：見本みたいに下に長い罫線 */
+.request-tabs {
+    margin: 18px 0 18px;
+    gap: 26px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+/* タブの見た目（既存を見本寄せで微調整） */
+.request-tabs .tab {
+    padding: 12px 18px;
+    font-size: 13px;
+    color: #333;
+}
+
+.request-tabs .tab.is-active {
+    border-bottom: 3px solid #000;
+}
+
+/* テーブルカード（白背景の枠） */
+.table-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #e6e6e6 inset;
+}
+
+/* テーブル（見本の薄いヘッダ） */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.table thead th {
+    background: #f7f7f7;
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: 800;
+}
+
+.table tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+/* 詳細リンク（見本は黒字で太め） */
+.detail-link {
+    color: #111;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+/* タブの切替用 */
+.is-hidden {
+    display: none !important;
 }

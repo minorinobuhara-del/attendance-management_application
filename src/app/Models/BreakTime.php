@@ -15,8 +15,8 @@ class BreakTime extends Model
         'break_end' => 'datetime',
     ];
 
-    public function attendance(): BelongsTo
+    public function attendance()
     {
-        return $this->belongsTo(Attendance::class);
+        return $this->belongsTo(\App\Models\Attendance::class, 'attendance_id');
     }
 }

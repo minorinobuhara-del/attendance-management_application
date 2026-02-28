@@ -15,9 +15,9 @@ class Attendance extends Model
         'clock_out' => 'datetime',
     ];
 
-    public function breaks(): HasMany
+    public function breaks()
     {
-        return $this->hasMany(BreakTime::class);
+        return $this->hasMany(\App\Models\BreakTime::class, 'attendance_id');
     }
 
     public function latestOpenBreak(): ?BreakTime

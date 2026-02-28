@@ -16,7 +16,7 @@ class AttendanceDetailController extends Controller
     $user = Auth::user();
 
     $attendance = Attendance::with('breaks')
-        ->where('user_id', $user->id) // 他人の勤怠を見れない
+        ->where('user_id', Auth::id()) // 他人の勤怠を見れない
         ->findOrFail($id);
 
     $pendingRequest = AttendanceRequest::where('attendance_id', $attendance->id)
@@ -32,7 +32,7 @@ class AttendanceDetailController extends Controller
     $user = Auth::user();
 
     $attendance = Attendance::with('breaks')
-        ->where('user_id', $user->id)
+        ->where('user_id', Auth::id())
         ->findOrFail($id);
 
     $exists = AttendanceRequest::where('attendance_id', $attendance->id)
@@ -45,12 +45,12 @@ class AttendanceDetailController extends Controller
 
     AttendanceRequest::create([
         'attendance_id' => $attendance->id,
-        'user_id' => $user->id,
+        'user_id' => Auth::id(),
         'status' => 'pending',
         'payload' => $request->validated(),
     ]);
 
-    // 申請一覧URLに合わせる（あなたの仕様）
+    // 申請一覧URLに合わせる
     return redirect()->route('stamp_correction_request.list')
         ->with('message', '修正申請を送信しました。');
     }

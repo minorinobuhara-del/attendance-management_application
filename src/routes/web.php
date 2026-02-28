@@ -47,9 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/clock-out', [AttendanceController::class, 'clockOut'])->name('attendance.clockOut');//退勤
     Route::get('/attendance/list', [AttendanceListController::class, 'index'])->name('attendance.list');//勤怠一覧（一般ユーザー）
     Route::get('/attendance/detail/{id}', [AttendanceDetailController::class, 'show'])->name('attendance.detail'); // 勤怠詳細(一般ユーザー)
-    Route::post('/attendance/detail/{id}', [AttendanceDetailController::class, 'requestUpdate'])
-        ->whereNumber('id')
-        ->name('attendance.detail.request');//勤怠修正申請
+    Route::post('/attendance/detail/{id}', [AttendanceDetailController::class, 'requestUpdate'])->name('attendance.detail.request');//勤怠修正申請
     Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])
         ->name('stamp_correction_request.list');//勤怠修正申請一覧
 });

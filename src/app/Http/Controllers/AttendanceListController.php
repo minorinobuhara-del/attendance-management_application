@@ -43,16 +43,16 @@ class AttendanceListController extends Controller
             $dateKey = $day->toDateString();
             $attendance = $attendances->get($dateKey);
 
-            $clockIn  = $attendance?->clock_in_at ? Carbon::parse($attendance->clock_in_at)->format('H:i') : '';
-            $clockOut = $attendance?->clock_out_at ? Carbon::parse($attendance->clock_out_at)->format('H:i') : '';
+            $clockIn  = $attendance?->clock_in ? Carbon::parse($attendance->clock_in)->format('H:i') : '';
+            $clockOut = $attendance?->clock_out ? Carbon::parse($attendance->clock_out)->format('H:i') : '';
 
             // 休憩合計（分）
             $breakMinutes = 0;
             if ($attendance) {
                 foreach ($attendance->breaks as $b) {
-                    if ($b->break_in_at && $b->break_out_at) {
-                        $breakMinutes += Carbon::parse($b->break_in_at)
-                            ->diffInMinutes(Carbon::parse($b->break_out_at));
+                    if ($b->break_start && $b->break_end) {
+                        $breakMinutes += Carbon::parse($b->break_start)
+                            ->diffInMinutes(Carbon::parse($b->break_end));
                     }
                 }
             }
@@ -63,9 +63,9 @@ class AttendanceListController extends Controller
 
             // 勤務合計（出勤〜退勤 - 休憩）
             $totalText = '';
-            if ($attendance && $attendance->clock_in_at && $attendance->clock_out_at) {
-                $workMinutes = Carbon::parse($attendance->clock_in_at)
-                    ->diffInMinutes(Carbon::parse($attendance->clock_out_at));
+            if ($attendance && $attendance->clock_in && $attendance->clock_out) {
+                $workMinutes = Carbon::parse($attendance->clock_in)
+                    ->diffInMinutes(Carbon::parse($attendance->clock_out));
 
                 $net = max(0, $workMinutes - $breakMinutes);
                 $totalText = sprintf('%d:%02d', intdiv($net, 60), $net % 60);

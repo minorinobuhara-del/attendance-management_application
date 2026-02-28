@@ -13,83 +13,103 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $user = $request->user();
-        $today = now()->toDateString();
+        $userId = Auth::id();
+        $today = Carbon::today()->toDateString();
 
-        $attendance = Attendance::with('breaks')
-            ->where('user_id', $user->id)
+        $attendance = Attendance::where('user_id', $userId)
             ->where('work_date', $today)
+            ->with('breaks')
             ->first();
 
-        $status = $attendance?->statusLabel() ?? '勤務外';
+            // ステータス判定
+        $status = '勤務外';
+
+        if ($attendance && $attendance->clock_in && !$attendance->clock_out) {
+            $status = '出勤中';
+
+            // 休憩中判定（最後の休憩が end なしなら休憩中）
+            $lastBreak = $attendance->breaks->last();
+            if ($lastBreak && $lastBreak->break_start && !$lastBreak->break_end) {
+                $status = '休憩中';
+            }
+        }
+
+        if ($attendance && $attendance->clock_out) {
+            $status = '退勤済';
+        }
 
         return view('attendance.index', compact('attendance','status'));
-
     }
 
+    //出勤
     public function clockIn(Request $request)
     {
-        $user = $request->user();
+        $userId = Auth::id();
         $today = now()->toDateString();
 
-        DB::transaction(function () use ($user, $today) {
-            $attendance = Attendance::firstOrCreate(
-                ['user_id' => $user->id, 'work_date' => $today],
-                ['clock_in' => now()]
-            );
-
-            // 既に出勤済みなら何もしない（1日1回）
-            if ($attendance->clock_in) return;
-
-            $attendance->update(['clock_in' => now()]);
-        });
+        Attendance::firstOrCreate(
+            ['user_id' => $userId, 'work_date' => $today],
+            ['clock_in' => now()]
+        );
 
         return redirect()->route('attendance.index');
     }
 
+    //休憩入
     public function breakIn(Request $request)
     {
-        $attendance = $this->todayAttendanceOrFail($request);
+        $userId = Auth::id();
+        $today = now()->toDateString();
 
-        // 出勤中のみ、休憩開始できる（退勤済/休憩中は不可）
-        if (!$attendance->clock_in || $attendance->clock_out || $attendance->latestOpenBreak()) {
-            return redirect()->route('attendance.index');
-        }
+        $attendance = Attendance::where('user_id', $userId)
+            ->where('work_date', $today)
+            ->firstOrFail();
 
         BreakTime::create([
             'attendance_id' => $attendance->id,
             'break_start' => now(),
+            'break_end' => null,
         ]);
 
         return redirect()->route('attendance.index');
     }
 
+    //休憩戻
     public function breakOut(Request $request)
     {
-        $attendance = $this->todayAttendanceOrFail($request);
+        $userId = Auth::id();
+        $today = now()->toDateString();
 
-        $open = $attendance->latestOpenBreak();
-        if (!$open || $attendance->clock_out) {
-            return redirect()->route('attendance.index');
-        }
+        $attendance = Attendance::where('user_id', $userId)
+            ->where('work_date', $today)
+            ->firstOrFail();
 
-        $open->update(['break_end' => now()]);
+        $break = BreakTime::where('attendance_id', $attendance->id)
+            ->whereNull('break_end')
+            ->latest()
+            ->firstOrFail();
+
+        $break->update(['break_end' => now()]);
 
         return redirect()->route('attendance.index');
     }
 
+    //退勤
     public function clockOut(Request $request)
     {
-        $attendance = $this->todayAttendanceOrFail($request);
+        $userId = Auth::id();
+        $today = now()->toDateString();
 
-        // 出勤中のみ退勤OK（休憩中は先に休憩戻しても良いが、ここでは禁止）
-        if (!$attendance->clock_in || $attendance->clock_out || $attendance->latestOpenBreak()) {
-            return redirect()->route('attendance.index');
+        $attendance = Attendance::where('user_id', $userId)
+            ->where('work_date', $today)
+            ->firstOrFail();
+
+        // 退勤は1日1回
+        if (!$attendance->clock_out) {
+            $attendance->update(['clock_out' => now()]);
         }
 
-        $attendance->update(['clock_out' => now()]);
-
-        return redirect()->route('attendance.index');
+        return redirect()->route('attendance.index')->with('message', 'お疲れ様でした。');
     }
 
     private function todayAttendanceOrFail(Request $request): Attendance
