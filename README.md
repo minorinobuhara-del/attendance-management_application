@@ -63,6 +63,17 @@ Laravel 開発環境構築
 
 - メール内容は実送信されています。
 
+## 管理者ログイン情報（テスト開発用）
+
+URL：
+http://localhost/admin/login
+
+メールアドレス：
+admin@example.com
+
+パスワード：
+password123
+
 ## 使用技術
 
 ・nginx/1.21.1

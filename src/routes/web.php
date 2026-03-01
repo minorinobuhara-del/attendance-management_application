@@ -8,6 +8,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\AttendanceDetailController;
 use App\Http\Controllers\StampCorrectionRequestController;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/detail/{id}', [AttendanceDetailController::class, 'requestUpdate'])->name('attendance.detail.request');//勤怠修正申請
     Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])
         ->name('stamp_correction_request.list');//勤怠修正申請一覧
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+        ->middleware(['fortify.admin', 'guest:admin'])
+        ->name('login');//管理者ログイン画面
+
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+        ->middleware(['fortify.admin', 'guest:admin', 'throttle:login'])
+        ->name('login.store');//管理者ログイン処理
+
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->middleware(['fortify.admin', 'auth:admin'])
+        ->name('logout');//管理者ログアウト処理
 });
 

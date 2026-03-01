@@ -27,7 +27,7 @@ class FortifyServiceProvider extends ServiceProvider
         // 登録後の遷移（メール認証誘導へ）
         $this->app->singleton(RegisterResponseContract::class, RegisterResponse::class);
 
-        // ログイン失敗時の固定文言（FN009）
+        // ログイン失敗時の固定文言
         $this->app->singleton(FailedLoginResponse::class, function () {
             return new class implements FailedLoginResponse {
                 public function toResponse($request)
@@ -45,9 +45,18 @@ class FortifyServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // 画面差し替え
-        Fortify::loginView(fn () => view('auth.login'));
-        Fortify::registerView(fn () => view('auth.register'));
+        // 画面差し替え（/admin は管理者用に）
+        Fortify::loginView(function () {
+    if (request()->is('admin/*')) {
+        return view('admin.login');   // ← 管理者ログインBlade
+    }
+    return view('auth.login');            // ← 一般ユーザーログインBlade
+    });
+
+        Fortify::registerView(function () {
+        // 管理者側に登録画面が不要なら admin は一般側に行かせない（一般用のみ）
+        return view('auth.register');
+    });
 
         // 登録処理
         Fortify::createUsersUsing(CreateNewUser::class);
