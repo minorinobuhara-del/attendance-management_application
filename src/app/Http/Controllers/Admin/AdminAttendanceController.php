@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Http\Requests\Admin\AdminAttendanceUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class AdminAttendanceController extends Controller
 {
@@ -71,12 +73,34 @@ class AdminAttendanceController extends Controller
         return view('admin.attendance.list', compact('date','prevDate','nextDate','label','rows'));
     }
 
-    // /admin/attendance/{attendance}
-    public function show(Attendance $attendance)
+    public function show(\App\Models\Attendance $attendance)
     {
-        $attendance->load(['user', 'breaks']);
+    $attendance->load('breaks', 'user');
 
-        // 詳細画面側で表示用に整形してもOK（bladeでformatしてもOK）
-        return view('admin.attendance.show', compact('attendance'));
+    $pendingRequest = \App\Models\AttendanceRequest::where('attendance_id', $attendance->id)
+        ->where('status', 'pending')
+        ->exists();
+
+    return view('admin.attendance.show', compact('attendance', 'pendingRequest'));
+    }
+
+    public function update(AdminAttendanceUpdateRequest $request, Attendance $attendance)
+    {
+    DB::transaction(function () use ($request, $attendance) {
+
+        $date = $attendance->work_date;
+
+        $attendance->update([
+            'clock_in'  => Carbon::parse($date.' '.$request->clock_in),
+            'clock_out' => Carbon::parse($date.' '.$request->clock_out),
+            'note'      => $request->note,
+        ]);
+
+        // break 更新処理もここに書く
+    });
+
+    return redirect()
+        ->route('admin.attendance.show', $attendance)
+        ->with('message', '修正しました');
     }
 }

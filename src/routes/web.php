@@ -67,19 +67,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware(['fortify.admin', 'auth:admin'])
         ->name('logout');//管理者ログアウト処理
-});
 
-Route::prefix('admin')
-    ->middleware(['web', 'use_admin_fortify'])
-    ->group(function () {
-        // Fortifyの admin/login, admin/logout はここに来るだけでOK（Fortifyがルートを持ってる）
-        // あなたの管理画面ルート
-        Route::get('/attendance/list', [\App\Http\Controllers\Admin\AdminAttendanceController::class, 'index'])
-            ->name('admin.attendance.list')//勤怠一覧（管理者）
-            ->middleware('auth:admin');
+    // --- 管理画面（勤怠） ---
+    Route::middleware(['use_admin_fortify', 'auth:admin'])->group(function () {
 
-        Route::get('/attendance/{attendance}', [\App\Http\Controllers\Admin\AdminAttendanceController::class, 'show'])
-            ->name('admin.attendance.show')//勤怠詳細（管理者）
-            ->middleware('auth:admin');
+        Route::get('/attendance/list', [AdminAttendanceController::class, 'index'])
+            ->name('attendance.list');//勤怠一覧（管理者）
+
+        Route::get('/attendance/{attendance}', [AdminAttendanceController::class, 'show'])
+            ->name('attendance.show');//勤怠詳細（管理者）
+
+        Route::put('/attendance/{attendance}', [AdminAttendanceController::class, 'update'])
+        ->name('attendance.update');//勤怠更新（管理者）
     });
-
+});

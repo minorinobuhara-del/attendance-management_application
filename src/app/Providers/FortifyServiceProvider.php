@@ -48,9 +48,10 @@ class FortifyServiceProvider extends ServiceProvider
     {
         // 画面差し替え（/admin は管理者用に）
         Fortify::loginView(function () {
-        return request()->is('admin/*')
-        ? view('admin.login')//管理者ログイン用
-        : view('auth.login');//一般ユーザーログイン用
+        if (request()->routeIs('admin.*')) {
+        return view('admin.login'); // 管理者ログイン
+        }
+        return view('auth.login'); // 一般ログイン
 });
 
         Fortify::registerView(function () {

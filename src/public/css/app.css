@@ -554,3 +554,16 @@
 .muted {
     color: #bbb;
 }
+
+/* タイトルがヘッダーに詰まらないように */
+.page--pad {
+    padding-top: 28px;
+    /* 見本っぽい余白 */
+}
+
+/* 管理者のメッセージ表示がある場合 */
+.attendance-message {
+    margin: 10px 0 18px;
+    font-size: 16px;
+    font-weight: 800;
+}
