@@ -19,7 +19,8 @@ class UseAdminFortify
         //  Fortifyが参照する guard を admin に切替
         config([
             'fortify.guard' => 'admin',
-            'fortify.home'  => '/admin', // ログイン後遷移
+            'fortify.passwords' => 'admins',
+            'fortify.home'  => '/admin/attendance/list', // ログイン後遷移
         ]);
 
         return $next($request);

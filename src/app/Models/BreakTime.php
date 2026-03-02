@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BreakTime extends Model
 {
-    protected $table = 'break_times';
+    //protected $table = 'break_times';
     protected $fillable = ['attendance_id','break_start','break_end'];
-    protected $casts = [
-        'break_start' => 'datetime',
-        'break_end' => 'datetime',
-    ];
+    //protected $casts = [
+        //'break_start' => 'datetime',
+        //'break_end' => 'datetime',
+    //];
 
-    public function attendance()
+    public function attendance(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Attendance::class, 'attendance_id');
+        return $this->belongsTo(Attendance::class, 'attendance_id');
     }
 }

@@ -19,6 +19,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
 use App\Http\Responses\LogoutResponse;
+use App\Models\Admin;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -47,11 +48,10 @@ class FortifyServiceProvider extends ServiceProvider
     {
         // 画面差し替え（/admin は管理者用に）
         Fortify::loginView(function () {
-    if (request()->is('admin/*')) {
-        return view('admin.login');   // ← 管理者ログインBlade
-    }
-    return view('auth.login');            // ← 一般ユーザーログインBlade
-    });
+        return request()->is('admin/*')
+        ? view('admin.login')//管理者ログイン用
+        : view('auth.login');//一般ユーザーログイン用
+});
 
         Fortify::registerView(function () {
         // 管理者側に登録画面が不要なら admin は一般側に行かせない（一般用のみ）
@@ -63,19 +63,29 @@ class FortifyServiceProvider extends ServiceProvider
 
         // 認証判定（パスワード一致の確認＋未認証フラグ）
         Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->email)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
-                return null; // FailedLoginResponse の固定文言へ
-            }
+        // 管理者ログイン（メール認証なし）
+        if (config('fortify.guard') === 'admin') {
+        $admin = \App\Models\Admin::where('email', $request->email)->first();
 
-            // 未認証なら誘導用フラグ
-            if (method_exists($user, 'hasVerifiedEmail') && ! $user->hasVerifiedEmail()) {
-                session(['needs_email_verification' => true]);
-            }
+        if (! $admin || ! Hash::check($request->password, $admin->password)) {
+            return null;
+        }
+        return $admin;
+        }
 
-            return $user;
-        });
+        // 一般ユーザー（メール認証あり）
+        $user = User::where('email', $request->email)->first();
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+        return null;
+        }
+
+        if (method_exists($user, 'hasVerifiedEmail') && ! $user->hasVerifiedEmail()) {
+        session(['needs_email_verification' => true]);
+        }
+
+        return $user;
+    });
 
         // ログインの流れ（英語requiredを潰す：FormRequestを先頭で実行）
         Fortify::authenticateThrough(function () {
@@ -86,11 +96,12 @@ class FortifyServiceProvider extends ServiceProvider
 
                 // 未認証ならメール認証誘導画面へ
                 function ($request, $next) {
-                    if (session('needs_email_verification')) {
-                        Auth::logout();
-                        session()->forget('needs_email_verification');
-                        return redirect()->route('verification.notice');
-                    }
+                // 管理者ログイン時はメール認証チェックをしない
+                if (config('fortify.guard') !== 'admin' && session('needs_email_verification')) {
+                Auth::logout();
+                session()->forget('needs_email_verification');
+                return redirect()->route('verification.notice');
+                }
                     return $next($request);
                 },
 

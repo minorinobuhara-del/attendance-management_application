@@ -9,6 +9,7 @@ use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\AttendanceDetailController;
 use App\Http\Controllers\StampCorrectionRequestController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\AdminAttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->middleware(['fortify.admin', 'auth:admin'])
         ->name('logout');//管理者ログアウト処理
 });
+
+Route::prefix('admin')
+    ->middleware(['web', 'use_admin_fortify'])
+    ->group(function () {
+        // Fortifyの admin/login, admin/logout はここに来るだけでOK（Fortifyがルートを持ってる）
+        // あなたの管理画面ルート
+        Route::get('/attendance/list', [\App\Http\Controllers\Admin\AdminAttendanceController::class, 'index'])
+            ->name('admin.attendance.list')//勤怠一覧（管理者）
+            ->middleware('auth:admin');
+
+        Route::get('/attendance/{attendance}', [\App\Http\Controllers\Admin\AdminAttendanceController::class, 'show'])
+            ->name('admin.attendance.show')//勤怠詳細（管理者）
+            ->middleware('auth:admin');
+    });
 

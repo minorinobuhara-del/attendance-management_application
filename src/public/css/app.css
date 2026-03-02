@@ -469,3 +469,88 @@
 .is-hidden {
     display: none !important;
 }
+
+/* 管理者ページ共通（背景 + 余白） */
+.admin-page {
+    min-height: calc(100vh - 64px);
+    background: #efefef;
+    padding: 28px 16px 60px;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* 見本の見出し位置（ヘッダー下に余白を作る） */
+.admin-head {
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+/* 日付切替バー（前日/翌日 + 中央日付） */
+.admin-datebar {
+    background: #fff;
+    border-radius: 6px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 14px;
+}
+
+.admin-datebar__btn {
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.admin-datebar__center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+/* テーブル “白いカード枠” */
+.table-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #e6e6e6 inset;
+}
+
+/* テーブル共通（申請一覧/管理者勤怠一覧で使い回し） */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.table thead th {
+    background: #f7f7f7;
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: 800;
+}
+
+.table tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.detail-link {
+    color: #111;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+.muted {
+    color: #bbb;
+}

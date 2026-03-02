@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'fortify.admin' => \App\Http\Middleware\UseAdminFortify::class,
+        'use_admin_fortify' => \App\Http\Middleware\UseAdminFortify::class,
     ];
 }
