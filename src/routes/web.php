@@ -11,6 +11,9 @@ use App\Http\Controllers\StampCorrectionRequestController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AdminAttendanceController;
 use App\Http\Controllers\Admin\AdminStaffController;
+use App\Http\Controllers\Admin\AdminStaffAttendanceController;
+use App\Http\Controllers\Admin\AdminMonthlyAttendanceController;
+use App\Http\Controllers\Admin\AdminStampCorrectionRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/detail/{id}', [AttendanceDetailController::class, 'requestUpdate'])->name('attendance.detail.request');//勤怠修正申請
     Route::get('/stamp_correction_request/list', [StampCorrectionRequestController::class, 'index'])
         ->name('stamp_correction_request.list');//勤怠修正申請一覧
+
+    Route::get('/stamp_correction_request/{attendance_correct_request_id}', [StampCorrectionRequestController::class, 'show'])
+        ->name('stamp_correction_request.show');//勤怠修正申請詳細
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -87,5 +93,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // 「月次勤怠（詳細）」遷移先（後で作成）
         Route::get('/attendance/month/{user}', [\App\Http\Controllers\Admin\AdminMonthlyAttendanceController::class, 'index'])
         ->name('attendance.month');
+
+        // スタッフ別勤怠一覧
+        Route::get('/attendance/staff/{user}', [AdminStaffAttendanceController::class, 'index'])
+        ->name('attendance.staff');
+
+        // CSV出力
+        Route::get('/attendance/staff/{user}/csv', [AdminStaffAttendanceController::class, 'csv'])
+        ->name('attendance.staff.csv');
+
+        //勤怠修正申請一覧
+        Route::get('/stamp_correction_request/list', [AdminStampCorrectionRequestController::class, 'index'])
+            ->name('stamp_correction_request.list');
+
+        //勤怠修正申請詳細
+        Route::get('/stamp_correction_request/approve/{attendanceRequest}', [AdminStampCorrectionRequestController::class, 'show'])
+            ->name('stamp_correction_request.show');
+
+        //勤怠修正申請承認
+        Route::put('/stamp_correction_request/approve/{attendanceRequest}', [AdminStampCorrectionRequestController::class, 'approve'])
+            ->name('stamp_correction_request.approve');
     });
 });

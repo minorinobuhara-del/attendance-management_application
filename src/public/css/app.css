@@ -353,6 +353,16 @@
     border-radius: 4px;
     font-weight: 800;
     cursor: pointer;
+    /* aタグでも中央寄せ＋下線なし */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.black-mini:hover {
+    opacity: .9;
 }
 
 /* 承認待ち注意 */
@@ -565,5 +575,81 @@
 .attendance-message {
     margin: 10px 0 18px;
     font-size: 16px;
+    font-weight: 800;
+}
+
+/* 月切替カード（写真の白い帯） */
+.month-card {
+    background: #fff;
+    border-radius: 6px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto 16px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-card__btn {
+    color: #777;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.month-card__center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    font-size: 13px;
+    color: #111;
+}
+
+.month-card__icon {
+    font-size: 14px;
+}
+
+/* スタッフ別勤怠は少し広め */
+.table-card--wide {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 詳細リンクの無効表示 */
+.detail-link.is-disabled {
+    color: #bbb;
+    cursor: default;
+    text-decoration: none;
+}
+
+/* CSVボタン位置（右下） */
+.csv-actions {
+    max-width: 720px;
+    width: 100%;
+    margin: 16px auto 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 申請詳細：右下のボタン/承認済み */
+.approve-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+}
+
+.badge-approved {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 4px;
+    background: #5f6a64;
+    /* 写真のグレー緑寄せ */
+    color: #fff;
     font-weight: 800;
 }
