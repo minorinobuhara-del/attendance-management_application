@@ -10,6 +10,7 @@ use App\Http\Controllers\AttendanceDetailController;
 use App\Http\Controllers\StampCorrectionRequestController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AdminAttendanceController;
+use App\Http\Controllers\Admin\AdminStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,5 +80,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::put('/attendance/{attendance}', [AdminAttendanceController::class, 'update'])
         ->name('attendance.update');//勤怠更新（管理者）
+
+        Route::get('/staff/list', [AdminStaffController::class, 'index'])
+        ->name('staff.list'); // スタッフ一覧(管理者)
+
+        // 「月次勤怠（詳細）」遷移先（後で作成）
+        Route::get('/attendance/month/{user}', [\App\Http\Controllers\Admin\AdminMonthlyAttendanceController::class, 'index'])
+        ->name('attendance.month');
     });
 });

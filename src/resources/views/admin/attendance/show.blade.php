@@ -106,7 +106,7 @@
         <div class="detail-actions">
         <button class="black-mini" type="submit">修正</button>
         </div>
-</form>
+    </form>
         @endif
 </div>
 @endsection

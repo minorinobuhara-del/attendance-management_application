@@ -87,20 +87,12 @@ class AdminAttendanceController extends Controller
     public function update(AdminAttendanceUpdateRequest $request, Attendance $attendance)
     {
     DB::transaction(function () use ($request, $attendance) {
-
-        $date = $attendance->work_date;
-
-        $attendance->update([
-            'clock_in'  => Carbon::parse($date.' '.$request->clock_in),
-            'clock_out' => Carbon::parse($date.' '.$request->clock_out),
-            'note'      => $request->note,
-        ]);
-
-        // break 更新処理もここに書く
+        $attendance->note = $request->input('note');
+        $attendance->save();
     });
 
     return redirect()
         ->route('admin.attendance.show', $attendance)
-        ->with('message', '修正しました');
+        ->with('message', '修正完了しました');
     }
 }
