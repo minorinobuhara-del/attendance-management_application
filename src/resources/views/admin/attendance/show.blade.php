@@ -81,7 +81,7 @@
         <th>備考</th>
         <td>
         @if($pendingRequest)
-            <span class="detail-strong">{{ $attendance->note ?? '' }}</span>
+            <span class="detail-strong">{{ $pendingRequest->payload['note'] ?? '' }}</span>
         @else
             <textarea class="note-input" name="note">{{ old('note', $attendance->note) }}</textarea>
         @endif
