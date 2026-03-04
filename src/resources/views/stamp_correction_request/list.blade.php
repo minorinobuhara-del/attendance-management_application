@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '申請一覧')
+@section('title', '申請一覧(一般ユーザー)')
 
 @section('content')
 <div class="page request-page">
@@ -31,7 +31,7 @@
               <td>{{ $r->payload['note'] ?? '' }}</td>
               <td>{{ $r->created_at->format('Y/m/d') }}</td>
               <td>
-                <a class="detail-link" href="{{ route('stamp_correction_request.show', ['attendance_correct_request_id' => $r->id]) }}">詳細</a>
+                <a class="detail-link" href="{{ route('attendance.detail', ['id' => $r['attendance_id']]) }}">詳細</a>
               </td>
             </tr>
           @endforeach
@@ -55,7 +55,7 @@
               <td>{{ $r->payload['note'] ?? '' }}</td>
               <td>{{ $r->created_at->format('Y/m/d') }}</td>
               <td>
-                <a class="detail-link" href="{{ route('stamp_correction_request.show', ['id' => $r->id]) }}">詳細</a>
+                <a class="detail-link" href="{{ route('attendance.detail', ['id' => $r['attendance_id']]) }}">詳細</a>
               </td>
             </tr>
           @endforeach
