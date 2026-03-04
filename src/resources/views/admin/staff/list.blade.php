@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="admin-page">
+    <div class="admin-container">
     <div class="page-head">
         <span class="page-bar"></span>
         <h1 class="page-title">スタッフ一覧</h1>
@@ -30,5 +31,6 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 @endsection

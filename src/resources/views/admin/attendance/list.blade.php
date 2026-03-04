@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="admin-page">
+    <div class="admin-container">
     <div class="page-head admin-head">
         <span class="page-bar"></span>
         <h1 class="page-title">{{ \Carbon\Carbon::parse($date)->format('Y年n月j日') }}の勤怠</h1>
@@ -52,5 +53,6 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 @endsection

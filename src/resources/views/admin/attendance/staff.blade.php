@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="admin-page">
+    <div class="admin-container">
     <div class="page-head">
         <span class="page-bar"></span>
         <h1 class="page-title">{{ $user->name }}さんの勤怠</h1>
@@ -60,5 +61,6 @@
             CSV出力
         </a>
     </div>
+</div>
 </div>
 @endsection
