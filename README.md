@@ -30,6 +30,8 @@ Laravel 開発環境構築
 
 ・php artisan optimize:clear
 
+・php artisan view:clear
+
 ・php artisan tinker
 
 ・brew install node
@@ -51,7 +53,7 @@ Laravel 開発環境構築
 ## メール認証について
 
 本アプリケーションでは、Laravel Fortify のメール認証機能を実行中（動作中）です。
-メール認証が完了していないユーザーはログインできないように確認中です。
+メール認証が完了していないユーザーはログインできないように実行中です。
 
 ## メール送信環境
 
