@@ -167,6 +167,32 @@ PASS Tests\Feature\Attendance\AttendanceCorrectionRequestTest
 ✓ approved request is visible on request list
 ✓ user can open request detail page
 
+PASS  Tests\Feature\Admin\AdminAttendanceListTest
+✓ admin can see all users attendance for the day
+✓ current date is displayed on admin attendance list
+✓ previous day button shows previous day attendance
+✓ next day button shows next day attendance
+
+PASS  Tests\Feature\Admin\AdminAttendanceDetailTest
+✓ admin can see selected attendance detail
+✓ clock in cannot be after clock out for admin
+✓ break start cannot be after clock out for admin
+✓ break end cannot be after clock out for admin
+✓ note is required for admin attendance update
+
+PASS  Tests\Feature\Admin\AdminStaffTest
+✓ admin can see all users name and email
+✓ admin can see selected user attendance list
+✓ previous month button shows previous month data for selected user
+✓ next month button shows next month data for selected user
+✓ admin can open attendance detail from user attendance list
+
+PASS  Tests\Feature\Admin\AdminStampCorrectionRequestTest
+✓ pending correction requests are displayed for admin
+✓ approved correction requests are displayed for admin
+✓ admin can see correction request detail
+✓ admin can approve correction request and attendance is updated
+
 ## 使用技術
 
 ・nginx/1.21.1
