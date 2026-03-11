@@ -34,6 +34,8 @@ Laravel 開発環境構築
 
 ・php artisan view:clear
 
+・php artisan serve
+
 ・php artisan tinker
 
 ・brew install node
@@ -206,3 +208,7 @@ PASS  Tests\Feature\Admin\AdminStampCorrectionRequestTest
 ・Homebrew 4.6.17
 
 ・Note v25.6.1
+
+## ER図
+
+![ER図](docs/attendance-management_application.png)
